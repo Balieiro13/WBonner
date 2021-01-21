@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 # Command handlers here
 def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('BOA NOITE, use:\n/news para saber o que tá rolando.\n/enews < i, j > para ver um slice')
+    update.message.reply_text('BOA NOITE, use:\n/news para saber o que tá rolando.\n/enews < i, j > para ver um slice.\n/calls para ver as chamadas.')
 
 def news(update, context) -> None:
     title = scrap_title()
@@ -38,6 +38,13 @@ def enews(update, context) -> None:
             s += '\n' + title[k] + '\n' + links[k] + '\n'
         update.message.reply_text(s)
 
+def calls(update, context) -> None:
+    calls = scrap_title()
+    s = ''
+    for i in range(len(calls)):
+        s += f'[{i}] ' + calls[i][:25] + '...' + '\n'
+    update.message.reply_text(s)
+
 def main():
     """Run bot."""
     t = open('./WB_TOKEN')
@@ -52,6 +59,7 @@ def main():
     dispatcher.add_handler(CommandHandler('help', start))
     dispatcher.add_handler(CommandHandler('news', news))
     dispatcher.add_handler(CommandHandler('enews', enews))
+    dispatcher.add_handler(CommandHandler('calls', calls))
 
     # Start the Bot
     updater.start_polling()

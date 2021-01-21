@@ -13,7 +13,7 @@ def scrap_title():
     for i in range(15):
         x = re.sub(r'<.*?>', '', str(a[i]))
         x = re.sub(r'\s+\s.*?\s+\s', '', x)
-        Titles.append(x)
+        Titles.append(x.strip())
     return Titles
 
 def scrap_title_link():
