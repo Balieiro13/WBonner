@@ -22,8 +22,3 @@ def scrap_title_link():
     for i in range(15):
         links.append(b[i]['href'])
     return links
-
-a = scrap_title_link()
-for i in range(15):
-    print(a[i])
-    

@@ -29,9 +29,9 @@ def enews(update, context) -> None:
     if len(context.args) == 1: j = 0
     else: j = int(context.args[1])
     if i > j:
-        update.message.reply_text(title[i] + links[i])
+        update.message.reply_text(title[i] + '\n' + links[i])
     elif i == 0 and j == 0:
-        update.message.reply_text(title[0] + links[0])
+        update.message.reply_text(title[0] + '\n' + links[0])
     else:
         s = ''
         for k in range(i,j):
