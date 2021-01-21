@@ -10,20 +10,21 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-title = scrap_title()
-links = scrap_title_link()
-
 # Command handlers here
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('BOA NOITE, use:\n/news para saber o que tá rolando.\n/enews < i, j > para ver um slice')
 
 def news(update, context) -> None:
+    title = scrap_title()
+    links = scrap_title_link()
     s = ''
     for t in range(len(title)):
         s += '\n' + title[t] + '\n' + links[t] + '\n'
     update.message.reply_text(s)
 
 def enews(update, context) -> None:
+    title = scrap_title()
+    links = scrap_title_link()
     i = int(context.args[0])
     if len(context.args) == 1: j = 0
     else: j = int(context.args[1])
