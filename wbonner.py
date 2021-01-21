@@ -1,7 +1,7 @@
 import logging
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
-from folha_mch import scrap
+from folha_mch import scrap_title, scrap_title_link
 
 # Enable logging
 logging.basicConfig(
@@ -10,7 +10,8 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-title = scrap()
+title = scrap_title()
+links = scrap_title_link()
 
 # Command handlers here
 def start(update: Update, context: CallbackContext) -> None:
@@ -18,8 +19,8 @@ def start(update: Update, context: CallbackContext) -> None:
 
 def news(update, context) -> None:
     s = ''
-    for t in title:
-        s += '\n' + t + '\n'
+    for t in range(len(title)):
+        s += '\n' + title[t] + '\n' + links[t] + '\n'
     update.message.reply_text(s)
 
 def enews(update, context) -> None:
@@ -27,13 +28,13 @@ def enews(update, context) -> None:
     if len(context.args) == 1: j = 0
     else: j = int(context.args[1])
     if i > j:
-        update.message.reply_text(title[i])
+        update.message.reply_text(title[i] + links[i])
     elif i == 0 and j == 0:
-        update.message.reply_text(title[0])
+        update.message.reply_text(title[0] + links[0])
     else:
         s = ''
         for k in range(i,j):
-            s += '\n' + title[k] + '\n'
+            s += '\n' + title[k] + '\n' + links[k] + '\n'
         update.message.reply_text(s)
 
 def main():
