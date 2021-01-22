@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 
+# faz um novo request sempre que um comando é usado no telegram.
 def new_soup():
     r = requests.get('https://www.folha.uol.com.br/')
     r.encoding = 'UTF-8'
@@ -9,6 +10,7 @@ def new_soup():
     soup = BeautifulSoup(HTML, 'html.parser')
     return soup
 
+# pega só o título das notícias.
 def scrap_title():
     soup = new_soup()
     a = soup.find_all('a', {'class':"c-main-headline__url"}) + soup.find_all('a', {'class':"c-list-links__url"})
@@ -19,6 +21,7 @@ def scrap_title():
         Titles.append(x.strip())
     return Titles
 
+# pega o link das notícias.
 def scrap_title_link():
     soup = new_soup()
     b = soup.find_all('a', {'class':"c-main-headline__url"}, href=True) + soup.find_all('a', {'class':"c-list-links__url"}, href=True)

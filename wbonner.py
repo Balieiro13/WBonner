@@ -12,8 +12,13 @@ logger = logging.getLogger(__name__)
 
 # Command handlers here
 def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('BOA NOITE, use:\n/news para saber o que tá rolando.\n/enews < i, j > para ver um slice.\n/calls para ver as chamadas.')
+    update.message.reply_text(
+        'BOA NOITE, use:
+        \n/news para saber o que tá rolando.
+        \n/enews < i, j > para ver um slice.
+        \n/calls para ver as chamadas.')
 
+# Mostra todas as news.
 def news(update, context) -> None:
     title = scrap_title()
     links = scrap_title_link()
@@ -22,12 +27,15 @@ def news(update, context) -> None:
         s += '\n' + title[t] + '\n' + links[t] + '\n'
     update.message.reply_text(s)
 
+# Mostra só um slice das news
 def enews(update, context) -> None:
     title = scrap_title()
     links = scrap_title_link()
     i = int(context.args[0])
-    if len(context.args) == 1: j = 0
+    if len(context.args) == 1:
+        j = 0
     else: j = int(context.args[1])
+
     if i > j:
         update.message.reply_text(title[i] + '\n' + links[i])
     elif i == 0 and j == 0:
@@ -38,6 +46,7 @@ def enews(update, context) -> None:
             s += '\n' + title[k] + '\n' + links[k] + '\n'
         update.message.reply_text(s)
 
+# Mostra só uma prévia dos títulos
 def calls(update, context) -> None:
     calls = scrap_title()
     s = ''
@@ -45,6 +54,7 @@ def calls(update, context) -> None:
         s += f'[{i}] ' + calls[i][:25] + '...' + '\n'
     update.message.reply_text(s)
 
+# run, bot, run!
 def main():
     """Run bot."""
     t = open('./WB_TOKEN')
