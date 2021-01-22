@@ -12,11 +12,9 @@ logger = logging.getLogger(__name__)
 
 # Command handlers here
 def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text(
-        'BOA NOITE, use:
-        \n/news para saber o que tá rolando.
-        \n/enews < i, j > para ver um slice.
-        \n/calls para ver as chamadas.')
+    msg = 'BOA NOITE, use:\n/news para saber o que tá rolando.\n/enews < i, j > para ver um slice.\n/calls para ver as chamadas.'
+    update.message.reply_text(msg)
+    
 
 # Mostra todas as news.
 def news(update, context) -> None:
